@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prototipo universitario para la gestión transparente de becas.">
+  <title>BecaClara | Sistema de Becas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" aria-label="Abrir menú">☰</button>
+    <button class="brand" data-view="resumen" aria-label="Ir al resumen">
+      <span class="brand-mark">BC</span>
+      <span><strong>BecaClara</strong><small>Gestión transparente</small></span>
+    </button>
+    <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+      <button data-view="resumen" class="active">Resumen</button>
+      <button data-view="solicitudes">Solicitudes</button>
+      <button data-view="politicas">Políticas</button>
+      <button data-view="pagos">Pagos</button>
+      <button data-view="auditoria">Auditoría</button>
+      <button data-view="transparencia">Transparencia</button>
+    </nav>
+    <div class="profile"><span>Analista IFARHU</span><small>Modo demostración</small></div>
+  </header>
+
+  <main id="app" class="container" aria-live="polite"></main>
+
+  <dialog id="applicationDialog">
+    <form id="applicationForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">Evaluación automática</p><h2>Nueva solicitud PASE-U</h2></div>
+        <button type="button" class="icon-button" data-close="applicationDialog" aria-label="Cerrar">×</button>
+      </div>
+      <p class="dialog-copy">El sistema validará los datos contra la política vigente.</p>
+      <div class="form-grid">
+        <label>Nombre completo<input name="name" required placeholder="Ej. Sofía Castillo"></label>
+        <label>Cédula<input name="nationalId" required placeholder="8-555-555"></label>
+        <label>Correo<input name="email" type="email" required placeholder="estudiante@correo.com"></label>
+        <label>Centro educativo<input name="school" required placeholder="Nombre del plantel"></label>
+        <label>Provincia<select name="province" required><option>Panamá</option><option>Panamá Oeste</option><option>Colón</option><option>Chiriquí</option><option>Coclé</option><option>Veraguas</option><option>Herrera</option><option>Los Santos</option><option>Bocas del Toro</option><option>Darién</option></select></label>
+        <label>Nivel<select name="level" required><option>Primaria</option><option>Premedia</option><option selected>Media</option></select></label>
+        <label>Promedio (0–5)<input name="average" type="number" min="0" max="5" step="0.1" value="4.0" required></label>
+        <label>Asistencia (%)<input name="attendance" type="number" min="0" max="100" value="90" required></label>
+      </div>
+      <div class="info-box">✓ Identidad y matrícula &nbsp; ✓ Promedio y asistencia &nbsp; ✓ Control de duplicidad</div>
+      <div class="dialog-actions"><button type="button" class="button secondary" data-close="applicationDialog">Cancelar</button><button class="button primary" type="submit">Evaluar solicitud</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="policyDialog">
+    <form id="policyForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">Cambio sin tocar el código</p><h2>Nueva versión de política</h2></div>
+        <button type="button" class="icon-button" data-close="policyDialog" aria-label="Cerrar">×</button>
+      </div>
+      <p class="dialog-copy">La política anterior se conserva para mantener la trazabilidad histórica.</p>
+      <div class="form-grid">
+        <label>Versión<input name="version" required placeholder="2027.01"></label>
+        <label>Vigente desde<input name="effectiveFrom" type="date" value="2027-01-01" required></label>
+        <label>Promedio mínimo<input name="minAverage" type="number" min="0" max="5" step="0.1" value="3.5" required></label>
+        <label>Asistencia mínima (%)<input name="minAttendance" type="number" min="0" max="100" value="80" required></label>
+        <label>Monto primaria<input name="primaryAmount" type="number" min="0" value="90" required></label>
+        <label>Monto premedia<input name="middleAmount" type="number" min="0" value="120" required></label>
+        <label>Monto media<input name="highAmount" type="number" min="0" value="175" required></label>
+      </div>
+      <div class="dialog-actions"><button type="button" class="button secondary" data-close="policyDialog">Cancelar</button><button class="button primary" type="submit">Crear y activar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="detailDialog"><div id="detailContent"></div></dialog>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

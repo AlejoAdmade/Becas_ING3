@@ -1,6 +1,6 @@
 # BecaClara
 
-Proyecto universitario del **Caso 6: Sistema de Becas**
+Proyecto del **Caso 6: Sistema de Becas**
 
 ## Archivos
 

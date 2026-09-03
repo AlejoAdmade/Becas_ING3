@@ -1,0 +1,277 @@
+# Plan de Entregables por Fases
+
+> Complemento de `estructura-proyecto-becas-simple.md`. En el repositorio vive como `docs/04-plan-trabajo.md`.
+> 4 fases · 4 entregas formales · Equipo de 4 estudiantes
+
+---
+
+## 0. Principio rector
+
+**Cada entrega debe poder demostrarse funcionando, no solo describirse.**
+
+Este es el error más común en proyectos por fases: dividir el trabajo por capas. "Fase 1: todo el HTML. Fase 2: todo el JavaScript." El resultado es que en la primera entrega no hay nada que mostrar, y en la última todo se acumula.
+
+La división correcta es por funcionalidad completa. Cada fase toma un problema del caso y lo resuelve de punta a punta: datos, lógica, pantalla y pruebas. Al final de cada entrega se puede decir *"esto ya funciona, míralo"*.
+
+Cada fase cierra una fila de la tabla de trazabilidad del caso:
+
+| Fase | Problema del caso que cierra |
+|---|---|
+| 1 | Diseño de la solución (ningún módulo aún) |
+| 2 | P1 — Duplicidad de datos |
+| 3 | P3 Validación automática · R1 Transparencia · R2 Adaptabilidad |
+| 4 | P2 Errores en pagos · P4 Trazabilidad |
+
+Esto le da a la presentación final una estructura natural: cuatro entregas, cuatro problemas resueltos.
+
+---
+
+## 1. Mapa de las cuatro fases
+
+| Fase | Nombre | Objetivo | Se demuestra con |
+|---|---|---|---|
+| **1** | Planificación y diseño | Definir qué se va a construir y cómo | Documentos, bocetos, casos de prueba |
+| **2** | Registro sin duplicados | Registrar estudiantes detectando duplicados | Pantalla de registro funcionando + bitácora |
+| **3** | Validación automática | Evaluar solicitudes contra reglas versionadas | Dictamen en pantalla + cambio de política en vivo |
+| **4** | Pagos y transparencia | Pagar sin duplicar y publicar totales | Pago rechazado por duplicado + página pública |
+
+---
+
+## 2. Entregables por fase
+
+### FASE 1 — Planificación y diseño
+
+*Sin código. Se entrega el plano del edificio.*
+
+| Entregable | Archivo | Responsable |
+|---|---|---|
+| Documento del caso: contexto, alcance, qué no se hará | `docs/00-caso.md` | PO |
+| Criterios de la beca derivados de la Ley 40 | `docs/03-reglas.md` | PO |
+| Este plan de fases con fechas asignadas | `docs/04-plan-trabajo.md` | PO |
+| Definición de los 5 módulos con sus funciones | `docs/01-modulos.md` | Backend |
+| Modelo de datos: los 4 objetos con sus campos | `docs/02-datos.md` | Backend |
+| Bocetos de las 5 pantallas | `docs/bocetos/` | Frontend |
+| Casos de prueba iniciales | `qa/casos-prueba.md` | QAS |
+| Datos de prueba con duplicados incluidos | `js/datos-semilla.js` | QAS |
+| Repositorio con la estructura de carpetas creada | Todo el árbol, archivos vacíos | Backend |
+
+**Qué se presenta:** el problema del caso, la tabla de trazabilidad, la arquitectura de módulos y el plan de trabajo. Se explica *qué* se va a construir y *por qué* así.
+
+**Criterios para cerrar la fase:**
+- [ ] La tabla de trazabilidad problema → módulo está completa y aprobada por los cuatro
+- [ ] Los criterios de la beca están definidos con su fundamento legal
+- [ ] Cada función de cada módulo tiene definido qué recibe y qué devuelve
+- [ ] Los datos de prueba incluyen al menos un duplicado exacto y uno aproximado
+- [ ] Cada integrante sabe cuáles son sus archivos
+
+**Todavía no se entrega:** ninguna pantalla funcional.
+
+---
+
+### FASE 2 — Registro sin duplicados
+
+*Primera entrega con algo que corre. Cierra el problema de duplicidad de datos.*
+
+| Entregable | Archivo | Responsable |
+|---|---|---|
+| Módulo de almacenamiento | `js/almacenamiento.js` | Backend |
+| Módulo de beneficiarios con detección de duplicados | `js/beneficiarios.js` | Backend |
+| Módulo de bitácora | `js/bitacora.js` | Backend |
+| Página de inicio | `index.html` | Frontend |
+| Pantalla de registro funcionando | `paginas/postular.html` | Frontend |
+| Hojas de estilo base | `css/estilos.css`, `css/componentes.css` | Frontend |
+| Casos de prueba de M1 ejecutados | `qa/resultados.md` | QAS |
+| Capturas de los 3 escenarios de duplicado | `entregas/fase-2/evidencia/` | QAS |
+| Informe de avance de la fase | `entregas/fase-2/informe.md` | PO |
+
+**Qué se demuestra en vivo:**
+1. Se registra un estudiante nuevo y se guarda.
+2. Se intenta registrar la misma cédula: el sistema lo rechaza y explica por qué.
+3. Se intenta con el mismo nombre y fecha de nacimiento pero otra cédula: lo marca como posible duplicado.
+4. Se abre la bitácora y se ven los tres intentos registrados con fecha y hora.
+
+**Criterios para cerrar la fase:**
+- [ ] Los datos sobreviven al recargar la página
+- [ ] Ningún duplicado logra guardarse
+- [ ] Toda acción, incluidos los rechazos, queda en la bitácora
+- [ ] No existe forma de borrar o editar un evento de la bitácora
+- [ ] Los casos de prueba de M1 están ejecutados y registrados
+
+**Todavía no se entrega:** validación de becas, solicitudes, pagos.
+
+---
+
+### FASE 3 — Validación automática
+
+*La fase con más peso técnico. Cierra validación automática, transparencia y adaptabilidad.*
+
+| Entregable | Archivo | Responsable |
+|---|---|---|
+| Catálogo de políticas versionadas | `js/datos-politicas.js` | PO + Backend |
+| Módulo de políticas | `js/politicas.js` | Backend |
+| Módulo de validación con dictamen detallado | `js/validacion.js` | Backend |
+| Módulo de solicitudes con estados | `js/solicitudes.js` | Backend |
+| Pantalla de consulta de estado y dictamen | `paginas/consultar.html` | Frontend |
+| Pantalla del funcionario | `paginas/funcionario.html` | Frontend |
+| Casos de prueba de M2, M3 y M4 ejecutados | `qa/resultados.md` | QAS |
+| Evidencia del cambio de política antes/después | `entregas/fase-3/evidencia/` | QAS |
+| Informe de avance de la fase | `entregas/fase-3/informe.md` | PO |
+
+**Qué se demuestra en vivo:**
+1. Un estudiante crea una solicitud y el sistema la evalúa automáticamente.
+2. El dictamen se muestra criterio por criterio: promedio requerido contra promedio real, cada uno con su marca de cumplido o no cumplido.
+3. Se cambia el promedio mínimo en el archivo de políticas, guardando una versión nueva.
+4. Un estudiante antes rechazado ahora califica.
+5. Se abre una solicitud anterior y **sigue mostrando la regla con la que fue evaluada originalmente**.
+
+El punto 5 es el más valioso de todo el proyecto. Demuestra que el sistema es adaptable sin perder trazabilidad, que es exactamente lo que pregunta el caso.
+
+**Criterios para cerrar la fase:**
+- [ ] Ninguna aprobación ocurre por criterio manual
+- [ ] El dictamen nunca muestra solo un veredicto: siempre el detalle
+- [ ] Cada solicitud guarda la versión de política que se le aplicó
+- [ ] Cambiar una política no altera solicitudes ya evaluadas
+- [ ] Los estados de la solicitud solo avanzan por las transiciones permitidas
+
+**Todavía no se entrega:** pagos, página pública de transparencia.
+
+---
+
+### FASE 4 — Pagos y transparencia
+
+*Cierre. Resuelve el problema de pagos y consolida la trazabilidad.*
+
+| Entregable | Archivo | Responsable |
+|---|---|---|
+| Módulo de pagos con clave única | `js/pagos.js` | Backend |
+| Funciones de totales y reportes | `js/bitacora.js` (ampliado) | Backend |
+| Página pública de transparencia | `paginas/transparencia.html` | Frontend |
+| Vista de historial completo por estudiante | `paginas/consultar.html` (ampliada) | Frontend |
+| Todos los casos de prueba ejecutados | `qa/resultados.md` final | QAS |
+| Reporte final de calidad con incidencias | `qa/reporte-final.md` | QAS |
+| Manual de uso breve | `README.md` | PO |
+| Presentación final | `docs/05-presentacion.md` | PO |
+| Video de respaldo de la demo | `entregas/fase-4/demo.mp4` | PO + Frontend |
+| Informe final del proyecto | `entregas/fase-4/informe.md` | PO |
+
+**Qué se demuestra en vivo:**
+1. Se aprueba una solicitud y se registra el pago.
+2. Se presiona pagar otra vez: el sistema lo rechaza porque la clave cédula + beca + período ya existe.
+3. Se abre la bitácora y aparece el intento rechazado, no oculto.
+4. La página pública muestra totales por provincia y programa, sin ningún dato personal.
+5. Se consulta el historial completo de un estudiante, desde su registro hasta su pago.
+
+**Criterios para cerrar la fase:**
+- [ ] Es imposible registrar dos veces el mismo pago
+- [ ] La página pública no expone ni un solo dato personal
+- [ ] El historial de cualquier estudiante se reconstruye completo desde la bitácora
+- [ ] Los 4 momentos de la demo salen sin errores tres veces seguidas
+- [ ] Existe el video de respaldo
+
+---
+
+## 3. Matriz de entregables por rol
+
+| | Fase 1 | Fase 2 | Fase 3 | Fase 4 |
+|---|---|---|---|---|
+| **Backend** | Módulos y datos definidos en documento | almacenamiento, beneficiarios, bitácora | políticas, validación, solicitudes | pagos, reportes |
+| **Frontend** | Bocetos de 5 pantallas | index + registro + CSS base | consultar + funcionario | transparencia + historial |
+| **QAS** | Casos de prueba + datos semilla | Resultados M1 + evidencia | Resultados M2/M3/M4 | Reporte final de calidad |
+| **PO** | Caso, reglas, plan de fases | Informe de avance | Informe de avance | Presentación, manual, informe final |
+
+Nadie entrega cero en ninguna fase. Si algún rol queda sin trabajo en una fase, el reparto está mal hecho.
+
+---
+
+## 4. Cómo se empaqueta cada entrega
+
+Una carpeta por entrega, siempre con la misma estructura. Así el avance es visible y comparable entre fases.
+
+```
+entregas/
+├── fase-1/
+│   ├── informe.md
+│   └── documentos/           # Copia de los docs entregados
+├── fase-2/
+│   ├── informe.md
+│   └── evidencia/            # Capturas de pantalla numeradas
+├── fase-3/
+│   ├── informe.md
+│   └── evidencia/
+└── fase-4/
+    ├── informe.md
+    ├── evidencia/
+    ├── demo.mp4
+    └── presentacion.pdf
+```
+
+Las capturas se nombran por lo que demuestran, no por el orden en que se tomaron: `01-duplicado-rechazado.png`, `02-bitacora-con-intento.png`. Quien las revise entiende sin abrirlas.
+
+---
+
+## 5. Plantilla del informe de avance
+
+El mismo formato en las cuatro fases. Se copia y se llena. Repetir la estructura hace que el avance se lea de un vistazo.
+
+```markdown
+# Informe de Avance — Fase N
+
+**Proyecto:** Sistema de Becas — Caso 6 (IFARHU)
+**Fecha de entrega:** dd/mm/aaaa
+**Equipo:** [nombres y roles]
+
+## 1. Objetivo de esta fase
+Una o dos frases.
+
+## 2. Problema del caso que se resuelve
+Fila de la tabla de trazabilidad que esta fase cierra.
+
+## 3. Entregables completados
+| Entregable | Responsable | Estado |
+|---|---|---|
+| | | Completo / Parcial |
+
+## 4. Qué se puede demostrar
+Lista numerada de lo que funciona y se puede mostrar en pantalla.
+
+## 5. Evidencia
+Referencia a las capturas y una línea de qué muestra cada una.
+
+## 6. Resultados de pruebas
+Casos ejecutados: N · Aprobados: N · Fallidos: N
+Detalle de los fallidos y qué se hará con ellos.
+
+## 7. Pendientes que pasan a la siguiente fase
+Con motivo. Un pendiente sin motivo es un pendiente olvidado.
+
+## 8. Dificultades y cómo se resolvieron
+La parte que más valoran los evaluadores: demuestra criterio, no solo ejecución.
+
+## 9. Qué viene en la fase siguiente
+```
+
+---
+
+## 6. Si una fase se atrasa
+
+Regla única: **se recorta funcionalidad, nunca calidad ni evidencia.**
+
+Es preferible entregar tres módulos bien probados y documentados que cinco a medias sin pruebas. Si el tiempo no alcanza:
+
+1. Se recorta de la lista de "sí lo hacemos" del alcance, y se anota en el informe como pendiente con motivo.
+2. Nunca se recorta la bitácora ni las pruebas. Son los dos elementos que sostienen la propuesta ante el caso.
+3. Se avisa en el informe de avance de esa fase, no en la siguiente.
+
+Un pendiente declarado con su razón demuestra control del proyecto. Un pendiente descubierto por el evaluador demuestra lo contrario.
+
+---
+
+## 7. Ajustar el plan a otro número de entregas
+
+**Si son 3 entregas:** se fusionan las fases 1 y 2. La primera entrega incluye documentación más registro funcionando. Es más exigente al inicio pero viable.
+
+**Si son 5 entregas:** se divide la fase 3, que es la más cargada. Una entrega para políticas y validación, otra para solicitudes y la pantalla del funcionario.
+
+**Si son 2 entregas:** fases 1 y 2 juntas, fases 3 y 4 juntas. En este caso conviene mover la página pública de transparencia a trabajo futuro.
+
+Lo que no debe cambiar en ningún escenario: cada entrega cierra al menos un problema del caso y se puede demostrar en pantalla.
